@@ -4,58 +4,62 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-            <title>Document</title>
+            <title>Astronaut finder by Simon Wilmots</title>
     </head>
     <body>
         <main>
-            <h1>Astronaut finder</h1>
-            <p>Simple web application for Astronaut querying</p>
-            <p>Security and Resilience by Design</p>
+                <div class="intro">
+                    <h1>Astronaut finder</h1>
+                    <h2>Simple web application for Astronaut querying</h2>
+                    <p><i>By Simon Wilmots for Security and Resilience by Design</i>    </p>
 
-            <form method="POST" id="search" action="/search">
-                <input type="text" name="query" id="query" placeholder="🔍  Search for an Astronaut..." />
-            </form>
+                    <form method="POST" id="search" action="/search">
+                        <input type="text" name="query" id="query" placeholder="🔍  Search for an Astronaut..." />
+                    </form>
 
-            <h2>List of Astronauts</h2>
-            <div class="container">
+                    
+                </div>
                 {% for astronaut in astronauts %}
-                <div class="card">  
-                    <div class="card-header">
-                        <img src="{{ astronaut[4] }}" />
-                    </div>
-                    <div class="card-body">                   
-                        <h3><!---<strong>{{ astronaut[0] }}:--> {{ astronaut[1] }}</h3>
-                        <h4>Rank</h4>
-                        <p>{{ astronaut[2] }}</p>
+                    <div class="card">  
+                        <div class="card-header">
+                            <img src="{{ astronaut[5] }}" />
+                        </div>
+                        <div class="card-body">                   
+                            <h3><strong>{{ astronaut[1] }}</strong></h3>   
+                            <h4>Mission</h4>
+                            <p>{{ astronaut[2] }}</p>
+                            <h4>Rank</h4>
+                            <p>{{ astronaut[3] }}</p>
 
-                        <h4>Achievements</h4>
-                        <p>{{ astronaut[3] }}</p>
-                    </div>
-                </div>  
+                            <h4>Achievements</h4>
+                            <p>{{ astronaut[4] }}</p>
+                        </div>
+                    </div>  
                 {% else %}
-                        <li>No astronauts found.</li>
+                    <h2>No astronauts found.</h2>
                 {% endfor %}
-            </div>
+            
 
-            <h2>Add new astronauts:</h2>
-            <form method="POST" action="/">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
+                <form method="POST" id="new" action="/">
+                    <h2>Add new astronauts</h2> <br>
 
-                <label for="mission">Mission:</label>
-                <input type="text" id="mission" name="mission"><br><br>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required><br><br>
 
-                <label for="rank">Rank:</label>
-                <input type="text" id="rank" name="rank"><br><br>
+                    <label for="mission">Mission:</label>
+                    <input type="text" id="mission" name="mission"><br><br>
 
-                <label for="achievements">Achievements:</label>
-                <input type="text" id="achievements" name="achievements"><br><br>
+                    <label for="rank">Rank:</label>
+                    <input type="text" id="rank" name="rank"><br><br>
 
-                <label for="achievements">Picture:</label>
-                <input type="text" id="picture" name="picture"><br><br>
+                    <label for="achievements">Achievements:</label>
+                    <input type="text" id="achievements" name="achievements"><br><br>
 
-                <input type="submit" value="Submit">
-            </form>
+                    <label for="achievements">Picture (URL) :</label> 
+                    <input type="text" id="picture" name="picture"><br><br>
+
+                    <input type="submit" value="Submit">
+                </form>
         </main>
 
 

@@ -16,26 +16,36 @@ main {
 	z-index: 99;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	margin: auto;
 }
 
 main img {
 	width: 100%;
 }
 
+main .intro {
+	color: white !important;
+	text-align: center;
+	margin: 5vw auto;
+}
+
+h4 {
+	margin: 0 auto;
+	text-align: center;
+}
+
 /* div.container {
-    display: flex;
     justify-content: center; 	
-    align-items: center;      
-    height: 100vh;          
+    align-items: center;             
 } */
 
-form#search {
+form#search  {
 	width: 50vw;
-	margin: 0 auto 5vw;
+	margin: 2vw auto;
 	display: flex;
 	align-items: center;
 	border: 2px solid gray;
-		border-radius: 20px;
+	border-radius: 20px;
 }
 
 form#search input {
@@ -46,6 +56,32 @@ form#search input {
     background-color: transparent;
     color: #fff;
 	outline: none;	
+}
+
+form#new {
+	width: 50vw;
+	align-items: center;
+	border-radius: 20px;
+	margin: 5vw auto;
+	padding: 2vw 0;
+	text-align: center;
+}
+
+form#new label {
+	float: left;
+}
+
+form#new input {
+	width: 30vw;
+	float: right;
+}
+
+form#new input[type="submit"] {
+	height: 2.5vw;
+	font-size: large;
+	background-color: gray;
+	border: none;
+	color: white;
 }
 
 /* CARDS */
