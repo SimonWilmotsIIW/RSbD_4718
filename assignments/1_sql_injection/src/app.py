@@ -21,6 +21,14 @@ def create_table():
         )
     ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS VerySensitiveData (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            password TEXT
+        )
+    ''')
+
     conn.commit()
     conn.close()
 
@@ -43,6 +51,17 @@ def prefill():
         INSERT INTO astronauts (name, mission, rank, achievements, picture)
         VALUES (?, ?, ?, ?, ?)
     ''', astronauts)
+
+    sensitive_data = [
+        ('admin', 'admin'),
+        ('superuser', '12345'),
+        ('user', 'supra'),
+    ]
+
+    cursor.executemany('''
+        INSERT INTO VerySensitiveData (username, password)
+        VALUES (?, ?)
+    ''', sensitive_data)
 
     conn.commit()
     conn.close()
@@ -69,10 +88,23 @@ def search():
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     name = request.form['query']
-    # SQL injection is possible here with:
-    # query = f"SELECT * FROM astronauts WHERE name ='{name}'"
+
+    """"
+    SQL injection is possible here with:
     query = f"SELECT * FROM astronauts WHERE name ='{name}'"
-    astronauts = cursor.execute(query)
+    Exploitations tried:
+        - test' OR 1=1; --
+        - Simon' UNION SELECT 1, username, password, NULL, NULL, NULL FROM VerySensitiveData--
+    """ 
+
+    # SQL Injection vulnerability:
+    # query = f"SELECT * FROM astronauts WHERE name ='{name}'"
+    # astronauts = cursor.execute(query)
+
+    # SQL Injection fix:
+    query = "SELECT * FROM astronauts WHERE name = ?"
+    astronauts = cursor.execute(query, (name,))
+
     return render_template('index.html', astronauts=astronauts)
 
 
