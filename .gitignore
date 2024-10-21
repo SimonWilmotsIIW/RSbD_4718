@@ -3,3 +3,4 @@ RSbD_venv
 **/sqlmap
 *.pem
 **/rockyou.txt
+**/sqlmap
